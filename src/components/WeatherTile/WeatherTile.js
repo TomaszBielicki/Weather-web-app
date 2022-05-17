@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { TileWeather, TileList } from "./WeatherTile.styled";
 
-export default function WeatherTile({ data }) {
+export default function WeatherTile({ temp, humidity, wind }) {
   return (
     <TileList>
-      <TileWeather>Temperatura : {data.jaworzno.current.temp_c}C*</TileWeather>
-      <TileWeather>Wilgotność : {data.jaworzno.current.humidity}%</TileWeather>
-      <TileWeather>
-        Prędkośc wiatru : {data.jaworzno.current.wind_kph}km/h
-      </TileWeather>
+      <TileWeather>Temperatura : {temp}C*</TileWeather>
+      <TileWeather>Wilgotność : {humidity}%</TileWeather>
+      <TileWeather>Prędkośc wiatru : {wind}km/h</TileWeather>
     </TileList>
   );
 }
