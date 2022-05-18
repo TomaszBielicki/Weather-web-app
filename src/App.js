@@ -6,12 +6,15 @@ import { getData } from "./data";
 import ButtonCustom from "./components/ButtonCustom/ButtonCustom";
 import { Background } from "./components/Background/Background.styled";
 import { InputBackground } from "./components/Background/InputBackground.styled";
+import Title from "./components/Title/Title";
+
 function App() {
   const [data, setData] = useState(getData());
   const [city, setCity] = useState("No Data Yet");
 
+  const [cityTitle, setCityTitle] = useState("");
+
   console.log(data);
-  const [refresh, setRefresh] = useState(false);
 
   const [temp, setTemp] = useState("");
   const [humidity, setHumidity] = useState("");
@@ -22,16 +25,22 @@ function App() {
     console.log(Object.keys(data));
     const found = Object.keys(data).find((ele) => ele == city);
     if (found) {
+      setCityTitle(city);
       setTemp(data[city]["current"].temp_c);
       setHumidity(data[city]["current"].humidity);
       setWind(data[city]["current"].wind_kph);
+    } else {
+      setCityTitle("There is no city with name " + city);
+      setTemp("");
+      setHumidity("");
+      setWind("");
     }
   };
 
   return (
     <Background>
       <ForecastHeader />
-      <h1>Enter you city:</h1>
+      <Title>Enter you city:</Title>
       <InputBackground>
         <input
           onChange={(e) => setCity(e.target.value)}
@@ -40,7 +49,7 @@ function App() {
         />
         <ButtonCustom onClick={handleSubmit}>Find!</ButtonCustom>
       </InputBackground>
-
+      <Title>{cityTitle}</Title>
       <WeatherTile temp={temp} humidity={humidity} wind={wind} />
     </Background>
   );
