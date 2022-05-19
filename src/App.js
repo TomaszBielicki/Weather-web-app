@@ -7,6 +7,8 @@ import ButtonCustom from "./components/ButtonCustom/ButtonCustom";
 import { Background } from "./components/Background/Background.styled";
 import { InputBackground } from "./components/Background/InputBackground.styled";
 import Title from "./components/Title/Title";
+import InputCustom from "./components/InputCustom/InputCustom";
+import Line from "./Line/Line";
 
 function App() {
   const [data, setData] = useState(getData());
@@ -23,7 +25,9 @@ function App() {
   const handleSubmit = () => {
     console.log("click happend");
     console.log(Object.keys(data));
+
     const found = Object.keys(data).find((ele) => ele == city);
+    console.log(city);
     if (found) {
       setCityTitle(city);
       setTemp(data[city]["current"].temp_c);
@@ -40,10 +44,11 @@ function App() {
   return (
     <Background>
       <ForecastHeader />
-      <Title>Enter you city:</Title>
+      <Title>Enter your city:</Title>
+      <Line />
       <InputBackground>
-        <input
-          onChange={(e) => setCity(e.target.value)}
+        <InputCustom
+          onChange={(e) => setCity(e.target.value.toLowerCase())}
           type="text"
           placeholder="Enter City Here"
         />
