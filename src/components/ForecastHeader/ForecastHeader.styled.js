@@ -9,6 +9,8 @@ export const HeaderStyle = styled.header`
   margin-bottom: 200px;
   height: 50px;
   width: auto;
+  margin-right: 10px;
+  margin-left: 10px;
 `;
 
 export const HeaderTile = styled.div`

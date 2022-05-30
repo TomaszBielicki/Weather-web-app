@@ -18,7 +18,7 @@ export const TileWeather = styled.div`
 
 export const TileList = styled.div`
   width: auto;
-  margin-top: 200px;
+  margin-top: 100px;
   display: flex;
   padding-left: 10px;
   padding-right: 10px;

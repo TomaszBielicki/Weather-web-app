@@ -4,6 +4,9 @@ export const OneLine = styled.div`
   height: 5px;
   width: auto;
   border-radius: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
   margin-bottom: 20px;
-  background-color: black;
+  margin-top: 10px;
+  background-color: white;
 `;

@@ -5,7 +5,7 @@ export const CustomButton = styled.button`
   height: 35px;
   margin-left: 5px;
   border-radius: 10px;
-  background-color: red;
+  background-color: rgba(106, 90, 205, 1);
   font-weight: bold;
   font-size: 20px;
   color: black;
