@@ -7,32 +7,43 @@ import ButtonCustom from "./components/ButtonCustom/ButtonCustom";
 import { Background } from "./components/Background/Background.styled";
 import { InputBackground } from "./components/Background/InputBackground.styled";
 import Title from "./components/Title/Title";
+import { TitleCity } from "./components/Title/Title.styled";
 import InputCustom from "./components/InputCustom/InputCustom";
-import Line from "./Line/Line";
+import Line from "./components/Line/Line";
+
+const API_KEY = "53290998ea334cafbf1183417221005";
 
 function App() {
-  const [data, setData] = useState(getData());
+  const [data, setData] = useState();
   const [city, setCity] = useState("No Data Yet");
 
   const [cityTitle, setCityTitle] = useState("");
-
-  console.log(data);
 
   const [temp, setTemp] = useState("");
   const [humidity, setHumidity] = useState("");
   const [wind, setWind] = useState("");
 
-  const handleSubmit = () => {
-    console.log("click happend");
-    console.log(Object.keys(data));
+  useEffect(() => {
+    fetch(
+      `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}&aqi=no`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setCity(data.location.name);
+      });
+  }, [city]);
 
-    const found = Object.keys(data).find((ele) => ele == city);
-    console.log(city);
-    if (found) {
-      setCityTitle(city);
-      setTemp(data[city]["current"].temp_c);
-      setHumidity(data[city]["current"].humidity);
-      setWind(data[city]["current"].wind_kph);
+  const handleSubmit = () => {
+    const capitalize = (cityName) => {
+      return cityName[0].toUpperCase() + cityName.slice(1);
+    };
+
+    if (data) {
+      setCityTitle(capitalize(city));
+      setTemp(data["current"].temp_c);
+      setHumidity(data["current"].humidity);
+      setWind(data["current"].wind_kph);
     } else {
       setCityTitle("There is no city with name " + city);
       setTemp("");
@@ -54,7 +65,7 @@ function App() {
         />
         <ButtonCustom onClick={handleSubmit}>Find!</ButtonCustom>
       </InputBackground>
-      <Title>{cityTitle}</Title>
+      <TitleCity>{cityTitle}</TitleCity>
       <WeatherTile temp={temp} humidity={humidity} wind={wind} />
     </Background>
   );
