@@ -23,21 +23,20 @@ function App() {
   const [humidity, setHumidity] = useState("");
   const [wind, setWind] = useState("");
 
-  useEffect(() => {
+  useEffect(() => {}, []);
+
+  function handleSubmit() {
     fetch(
       `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}&aqi=no`
     )
       .then((res) => res.json())
       .then((data) => {
         setData(data);
-        setCity(data.location.name);
       });
-  }, [city]);
-
-  const handleSubmit = () => {
     const capitalize = (cityName) => {
       return cityName[0].toUpperCase() + cityName.slice(1);
     };
+    console.log(data);
 
     if (data) {
       setCityTitle(capitalize(city));
@@ -50,7 +49,7 @@ function App() {
       setHumidity("");
       setWind("");
     }
-  };
+  }
 
   return (
     <Background>
@@ -59,7 +58,7 @@ function App() {
       <Line />
       <InputBackground>
         <InputCustom
-          onChange={(e) => setCity(e.target.value.toLowerCase())}
+          onChange={(e) => setCity(e.target.value)}
           type="text"
           placeholder="Enter City Here"
         />
